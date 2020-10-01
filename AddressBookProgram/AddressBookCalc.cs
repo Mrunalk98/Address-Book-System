@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AddressBookProgram
 {
@@ -11,7 +12,7 @@ namespace AddressBookProgram
     {
         public static List<PersonDetails> Contacts = new List<PersonDetails>();
 
-        public void AddContacts(string firstName, string lastName, string address, string city, string state, int zip, int phone, string email)
+        public void AddContacts(string firstName, string lastName, string address, string city, string state, int zip, long phone, string email)
         {
             PersonDetails person = new PersonDetails(firstName, lastName, address, city, state, zip, phone, email);
             Contacts.Add(person);
@@ -53,50 +54,49 @@ namespace AddressBookProgram
                 switch (choice)
                 {
                     case 1:
-                        Console.Write("Enter the new First Name : ");
+                        Console.Write("Enter First Name : ");
                         person.firstName = Console.ReadLine();
                         Console.WriteLine("First Name updated successfully");
                         break;
 
                     case 2:
-                        Console.Write("Enter the new Last Name : ");
+                        Console.Write("Enter Last Name : ");
                         person.lastName = Console.ReadLine();
                         Console.WriteLine("Last Name updated successfully");
                         break;
 
                     case 3:
-                        Console.Write("Enter the new Address: ");
+                        Console.Write("Enter Address: ");
                         person.address = Console.ReadLine();
                         Console.WriteLine("Address updated successfully");
                         break;
 
                     case 4:
-                        Console.Write("Enter the new City: ");
+                        Console.Write("Enter City: ");
                         person.city = Console.ReadLine();
                         Console.WriteLine("City updated successfully");
                         break;
 
                     case 5:
-                        Console.Write("Enter the new State: ");
+                        Console.Write("Enter State: ");
                         person.state = Console.ReadLine();
                         Console.WriteLine("State updated successfully");
                         break;
 
                     case 6:
-                        Console.Write("Enter the new Zip Code: ");
+                        Console.Write("Enter Zip Code: ");
                         person.zip = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Zip Code updated successfully");
                         break;
 
                     case 7:
-                        Console.Write("Enter the new Phone Number: ");
-                        person.phoneNumber = Convert.ToInt32(Console.ReadLine());
+                        person.phoneNumber = Convert.ToInt64(checkPhoneNumberLength());
                         Console.WriteLine("Phone Number updated successfully");
                         break;
 
                     case 8:
-                       Console.Write("Enter the new Email: ");
-                        person.email = Console.ReadLine();
+                       Console.Write("Enter Email: ");
+                        person.email = checkEmail();
                         Console.WriteLine("Email updated successfully");
                         break;
                 }
@@ -117,6 +117,56 @@ namespace AddressBookProgram
                 Console.WriteLine("Contact deleted successfully");
             }
 
+        }
+
+        public string checkPhoneNumberLength()
+        {
+            string phoneNo = "";
+            while (phoneNo.Length != 10)
+            {
+                Console.Write("Enter Phone Number: ");
+                phoneNo = Console.ReadLine();
+                if (phoneNo.Length != 10)
+                {
+                    Console.WriteLine("Enter a valid Phone Number!");
+                }
+            }
+            return phoneNo;
+        }
+
+        public string checkZipLength()
+        {
+            string zip = "";
+            while (zip.Length != 6)
+            {
+                Console.Write("Enter Zip Code: ");
+                zip = Console.ReadLine();
+                if (zip.Length != 10)
+                {
+                    Console.WriteLine("Enter a valid Zip Code!");
+                }
+            }
+            return zip;
+        }
+
+        public string checkEmail()
+        {
+            string email = "";
+            bool validEmail = false;
+            Regex regex = new Regex("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$");
+
+            while (!validEmail)
+            {
+                Console.Write("Enter Email: ");
+                email = Console.ReadLine();
+                validEmail = regex.IsMatch(email);
+
+                if (!validEmail)
+                {
+                    Console.WriteLine("Enter a valid Email!");
+                }
+            }
+            return email;
         }
 
 

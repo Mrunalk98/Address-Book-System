@@ -12,10 +12,10 @@ namespace AddressBookProgram
         public string city;
         public string state;
         public int zip;
-        public int phoneNumber;
+        public long phoneNumber;
         public string email;
 
-        public PersonDetails(string FIRST_NAME, string LAST_NAME, string ADDRESS, string CITY, string STATE, int ZIP, int PHONE_NO, string EMAIL)
+        public PersonDetails(string FIRST_NAME, string LAST_NAME, string ADDRESS, string CITY, string STATE, int ZIP, long PHONE_NO, string EMAIL)
         {
             this.firstName = FIRST_NAME;
             this.lastName = LAST_NAME;

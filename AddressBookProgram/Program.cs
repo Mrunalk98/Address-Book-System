@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AddressBookProgram
 {
@@ -50,12 +51,9 @@ namespace AddressBookProgram
             var city = Console.ReadLine();
             Console.Write("Enter State : ");
             var state = Console.ReadLine();
-            Console.Write("Enter Zip Code: ");
-            var zip = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter Phone Number : ");
-            var phone = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter Email : ");
-            var email = Console.ReadLine();
+            int zip = Convert.ToInt32(addressBook.checkZipLength());
+            long phone = Convert.ToInt64(addressBook.checkPhoneNumberLength());
+            var email = addressBook.checkEmail();
 
             addressBook.AddContacts(firstName, lastName, address, city, state, zip, phone, email);
         }
@@ -73,5 +71,6 @@ namespace AddressBookProgram
             var name = Console.ReadLine();
             addressBook.DeleteContact(name);
         }
+
     }
 }
