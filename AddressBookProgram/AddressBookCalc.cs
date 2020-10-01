@@ -104,6 +104,21 @@ namespace AddressBookProgram
             
         }
 
+        public void DeleteContact(string name)
+        {
+            PersonDetails person = Contacts.Find(x => x.firstName == name);
+            if (person == null)
+            {
+                Console.WriteLine("Contact does not exist");
+            }
+            else
+            {
+                Contacts.Remove(person);
+                Console.WriteLine("Contact deleted successfully");
+            }
+
+        }
+
 
     }
 }

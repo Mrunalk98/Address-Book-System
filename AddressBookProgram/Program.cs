@@ -9,9 +9,9 @@ namespace AddressBookProgram
         {
             Console.WriteLine("Welcome to Address Book Program!");
             int option = 0;
-            while(option != 4)
+            while(option != 5)
             {
-                Console.WriteLine("\nSelect an option : \n1. Add Contact \n2. Display Address Book \n3. Edit Contact \n4. Exit");
+                Console.WriteLine("\nSelect an option : \n1. Add Contact \n2. Display Address Book \n3. Edit Contact \n4. Delete Contact \n5. Exit \n");
                 option = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
                 switch (option)
@@ -25,6 +25,10 @@ namespace AddressBookProgram
 
                     case 3:
                         ToEditContact();
+                        break;
+
+                    case 4:
+                        ToDeleteContact();
                         break;
 
                     default:
@@ -61,6 +65,13 @@ namespace AddressBookProgram
             Console.Write("Enter the first name of the person : ");
             var name = Console.ReadLine();
             addressBook.EditContact(name);
+        }
+
+        private static void ToDeleteContact()
+        {
+            Console.Write("Enter the first name of the person : ");
+            var name = Console.ReadLine();
+            addressBook.DeleteContact(name);
         }
     }
 }
