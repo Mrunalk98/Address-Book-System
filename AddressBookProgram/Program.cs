@@ -9,16 +9,25 @@ namespace AddressBookProgram
         {
             Console.WriteLine("Welcome to Address Book Program!");
             int option = 0;
-            while(option != 2)
+            while(option != 4)
             {
-                Console.WriteLine("\nSelect an option : \n1. Add Contact \n2.Exit");
+                Console.WriteLine("\nSelect an option : \n1. Add Contact \n2. Display Address Book \n3. Edit Contact \n4. Exit");
                 option = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
                 switch (option)
                 {
                     case 1:
                         ToAddContact();
                         break;
                     case 2:
+                        addressBook.PrintContacts();
+                        break;
+
+                    case 3:
+                        ToEditContact();
+                        break;
+
+                    default:
                         break;
 
                 }
@@ -45,6 +54,13 @@ namespace AddressBookProgram
             var email = Console.ReadLine();
 
             addressBook.AddContacts(firstName, lastName, address, city, state, zip, phone, email);
+        }
+
+        private static void ToEditContact()
+        {
+            Console.Write("Enter the first name of the person : ");
+            var name = Console.ReadLine();
+            addressBook.EditContact(name);
         }
     }
 }
