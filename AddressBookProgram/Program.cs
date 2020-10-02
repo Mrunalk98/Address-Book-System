@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AddressBookProgram
@@ -12,16 +13,17 @@ namespace AddressBookProgram
             int option = 0;
             while(option != 5)
             {
-                Console.WriteLine("\nSelect an option : \n1. Add Contact \n2. Display Address Book \n3. Edit Contact \n4. Delete Contact \n5. Exit \n");
+                Console.WriteLine("\nSelect an option : \n1. Display Address Book \n2. Add Contact \n3. Edit Contact \n4. Delete Contact \n5. Exit \n");
                 option = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
                 switch (option)
                 {
                     case 1:
-                        ToAddContact();
-                        break;
-                    case 2:
                         addressBook.PrintContacts();
+                        break;
+
+                    case 2:
+                        ToAddContact();
                         break;
 
                     case 3:
@@ -41,6 +43,8 @@ namespace AddressBookProgram
 
         private static void ToAddContact()
         {
+            Console.WriteLine("Enter the name of Address Book : ");
+            string bookName = Console.ReadLine();
             Console.Write("Enter First Name : ");
             var firstName = Console.ReadLine();
             Console.Write("Enter Last Name : ");
@@ -55,7 +59,7 @@ namespace AddressBookProgram
             long phone = Convert.ToInt64(addressBook.checkPhoneNumberLength());
             var email = addressBook.checkEmail();
 
-            addressBook.AddContacts(firstName, lastName, address, city, state, zip, phone, email);
+            addressBook.AddContacts(bookName, firstName, lastName, address, city, state, zip, phone, email);
         }
 
         private static void ToEditContact()
