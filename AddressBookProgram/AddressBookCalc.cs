@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -10,6 +11,8 @@ namespace AddressBookProgram
 
     public class AddressBookCalc
     {
+
+        public static ValidateInput validate = new ValidateInput();
         public static Dictionary<string, List<PersonDetails>> AddressBooks = new Dictionary<string, List<PersonDetails>>();
 
         public void AddContacts(string bookName, string firstName, string lastName, string address, string city, string state, int zip, long phone, string email)
@@ -43,16 +46,16 @@ namespace AddressBookProgram
                     Console.WriteLine("All Contacts in " + book.Key + " : \n");
                     foreach (PersonDetails person in book.Value)
                     {
-                        Console.WriteLine("First Name: " + person.firstName);
-                        Console.WriteLine("Last Name: " + person.lastName);
-                        Console.WriteLine("Address: " + person.address);
-                        Console.WriteLine("City: " + person.city);
-                        Console.WriteLine("State " + person.state);
-                        Console.WriteLine("Zip Code: " + person.zip);
-                        Console.WriteLine("Phone Number: " + person.phoneNumber);
-                        Console.WriteLine("Email: " + person.email);
-                        Console.WriteLine();
+                        Console.WriteLine("First Name : " + person.firstName);
+                        Console.WriteLine("Last Name : " + person.lastName);
+                        Console.WriteLine("Address : " + person.address);
+                        Console.WriteLine("City : " + person.city);
+                        Console.WriteLine("State : " + person.state);
+                        Console.WriteLine("Zip Code : " + person.zip);
+                        Console.WriteLine("Phone Number : " + person.phoneNumber);
+                        Console.WriteLine("Email : " + person.email);
                     }
+                    Console.WriteLine();
                 }
             }
             
@@ -73,49 +76,43 @@ namespace AddressBookProgram
                     switch (choice)
                     {
                         case 1:
-                            Console.Write("Enter First Name : ");
-                            person.firstName = Console.ReadLine();
+                            person.firstName = validate.checkIfString("Enter new First Name : ");
                             Console.WriteLine("First Name updated successfully");
                             break;
 
                         case 2:
-                            Console.Write("Enter Last Name : ");
-                            person.lastName = Console.ReadLine();
+                            person.lastName = validate.checkIfString("Enter new Last Name : ");
                             Console.WriteLine("Last Name updated successfully");
                             break;
 
                         case 3:
-                            Console.Write("Enter Address: ");
+                            Console.Write("Enter new Address: ");
                             person.address = Console.ReadLine();
                             Console.WriteLine("Address updated successfully");
                             break;
 
                         case 4:
-                            Console.Write("Enter City: ");
-                            person.city = Console.ReadLine();
+                            person.city = validate.checkIfString("Enter new City: ");
                             Console.WriteLine("City updated successfully");
                             break;
 
                         case 5:
-                            Console.Write("Enter State: ");
-                            person.state = Console.ReadLine();
+                            person.state = validate.checkIfString("Enter new State: ");
                             Console.WriteLine("State updated successfully");
                             break;
 
                         case 6:
-                            Console.Write("Enter Zip Code: ");
-                            person.zip = Convert.ToInt32(Console.ReadLine());
+                            person.zip = Convert.ToInt32(validate.checkZipLength("Enter new Zip Code: "));
                             Console.WriteLine("Zip Code updated successfully");
                             break;
 
                         case 7:
-                            person.phoneNumber = Convert.ToInt64(checkPhoneNumberLength());
+                            person.phoneNumber = Convert.ToInt64(validate.checkPhoneNumberLength("Enter new Phone Number: "));
                             Console.WriteLine("Phone Number updated successfully");
                             break;
 
                         case 8:
-                            Console.Write("Enter Email: ");
-                            person.email = checkEmail();
+                            person.email = validate.checkEmail("Enter new Email: ");
                             Console.WriteLine("Email updated successfully");
                             break;
                     }
@@ -149,57 +146,6 @@ namespace AddressBookProgram
             }
 
         }
-
-        public string checkPhoneNumberLength()
-        {
-            string phoneNo = "";
-            while (phoneNo.Length != 10)
-            {
-                Console.Write("Enter Phone Number: ");
-                phoneNo = Console.ReadLine();
-                if (phoneNo.Length != 10)
-                {
-                    Console.WriteLine("Enter a valid Phone Number!");
-                }
-            }
-            return phoneNo;
-        }
-
-        public string checkZipLength()
-        {
-            string zip = "";
-            while (zip.Length != 6)
-            {
-                Console.Write("Enter Zip Code: ");
-                zip = Console.ReadLine();
-                if (zip.Length != 6)
-                {
-                    Console.WriteLine("Enter a valid Zip Code!");
-                }
-            }
-            return zip;
-        }
-
-        public string checkEmail()
-        {
-            string email = "";
-            bool validEmail = false;
-            Regex regex = new Regex("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$");
-
-            while (!validEmail)
-            {
-                Console.Write("Enter Email: ");
-                email = Console.ReadLine();
-                validEmail = regex.IsMatch(email);
-
-                if (!validEmail)
-                {
-                    Console.WriteLine("Enter a valid Email!");
-                }
-            }
-            return email;
-        }
-
 
     }
 }

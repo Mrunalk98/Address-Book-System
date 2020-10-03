@@ -7,6 +7,7 @@ namespace AddressBookProgram
     class Program
     {
         public static AddressBookCalc addressBook = new AddressBookCalc();
+        public static ValidateInput validate = new ValidateInput();
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Address Book Program!");
@@ -45,19 +46,15 @@ namespace AddressBookProgram
         {
             Console.WriteLine("Enter the name of Address Book : ");
             string bookName = Console.ReadLine();
-            Console.Write("Enter First Name : ");
-            var firstName = Console.ReadLine();
-            Console.Write("Enter Last Name : ");
-            var lastName = Console.ReadLine();
+            var firstName = validate.checkIfString("Enter First Name : ");
+            var lastName = validate.checkIfString("Enter Last Name : ");
             Console.Write("Enter Address : ");
             var address = Console.ReadLine();
-            Console.Write("Enter City : ");
-            var city = Console.ReadLine();
-            Console.Write("Enter State : ");
-            var state = Console.ReadLine();
-            int zip = Convert.ToInt32(addressBook.checkZipLength());
-            long phone = Convert.ToInt64(addressBook.checkPhoneNumberLength());
-            var email = addressBook.checkEmail();
+            var city = validate.checkIfString("Enter City : ");
+            var state = validate.checkIfString("Enter State : ");
+            int zip = Convert.ToInt32(validate.checkZipLength("Enter Zip Code: "));
+            long phone = Convert.ToInt64(validate.checkPhoneNumberLength("Enter Phone Number: "));
+            var email = validate.checkEmail("Enter Email: ");
 
             addressBook.AddContacts(bookName, firstName, lastName, address, city, state, zip, phone, email);
         }
