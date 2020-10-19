@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -60,7 +61,8 @@ namespace AddressBookProgram
         public string checkIfString(string inputStmt)
         {
             string name = "";
-            while(!isString(name) || name == "")
+            bool nameExists = false;
+            while (!isString(name) || name == "" || nameExists)
             {
                 Console.Write(inputStmt);
                 name = Console.ReadLine();
@@ -68,6 +70,10 @@ namespace AddressBookProgram
                 if (!isString(name))
                 {
                     Console.WriteLine("Input should not contain any numbers!");
+                }
+                if (inputStmt.Contains("First Name"))
+                {
+                    nameExists = checkIfNameAlreadyExists(name);
                 }
             }
             return name;
@@ -88,6 +94,17 @@ namespace AddressBookProgram
                     return false;
 
             return true;
+        }
+
+        public bool checkIfNameAlreadyExists(string name)
+        {
+            if (AddressBookCalc.CurrentContact.Any(x => x.firstName.Equals(name)))
+            {
+                Console.WriteLine("Name " + "'" + name + "'" + " already exists");
+                return true;
+            }
+            else
+                return false;
         }
 
     }

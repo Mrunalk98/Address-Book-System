@@ -14,11 +14,11 @@ namespace AddressBookProgram
 
         public static ValidateInput validate = new ValidateInput();
         public static Dictionary<string, List<PersonDetails>> AddressBooks = new Dictionary<string, List<PersonDetails>>();
+        public static List<PersonDetails> CurrentContact = new List<PersonDetails>();
 
         public void AddContacts(string bookName, string firstName, string lastName, string address, string city, string state, int zip, long phone, string email)
         {
             PersonDetails person = new PersonDetails(firstName, lastName, address, city, state, zip, phone, email);
-            List<PersonDetails> CurrentContact = new List<PersonDetails>();
             if (!AddressBooks.TryGetValue(bookName, out CurrentContact))
             {
                 CurrentContact = new List<PersonDetails>();
@@ -54,6 +54,7 @@ namespace AddressBookProgram
                         Console.WriteLine("Zip Code : " + person.zip);
                         Console.WriteLine("Phone Number : " + person.phoneNumber);
                         Console.WriteLine("Email : " + person.email);
+                        Console.WriteLine();
                     }
                     Console.WriteLine();
                 }
