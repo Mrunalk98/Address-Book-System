@@ -14,6 +14,10 @@ namespace AddressBookProgram
 
         public static ValidateInput validate = new ValidateInput();
         public static Dictionary<string, List<PersonDetails>> AddressBooks = new Dictionary<string, List<PersonDetails>>();
+        public static List<string> NamesInCity = new List<string>();
+        public static List<string> NamesInState = new List<string>();
+        public static Dictionary<string, List<string>> CityBook = new Dictionary<string, List<string>>();
+        public static Dictionary<string, List<string>> StateBook = new Dictionary<string, List<string>>();
         public static List<PersonDetails> CurrentContact = new List<PersonDetails>();
 
         public void AddContacts(string bookName, string firstName, string lastName, string address, string city, string state, int zip, long phone, string email)
@@ -23,9 +27,41 @@ namespace AddressBookProgram
             {
                 CurrentContact = new List<PersonDetails>();
                 AddressBooks.Add(bookName, CurrentContact);
+
+                if (!CityBook.TryGetValue(city, out NamesInCity))
+                {
+                    NamesInCity = new List<string>();
+                    CityBook.Add(city, NamesInCity);
+                }
+
+                if (!StateBook.TryGetValue(state, out NamesInState))
+                {
+                    NamesInState = new List<string>();
+                    StateBook.Add(state, NamesInState);
+                }
             }
+            NamesInCity.Add(firstName + " " + lastName);
+            NamesInState.Add(firstName + " " + lastName);
             CurrentContact.Add(person);
             Console.WriteLine("\nContact added successfully");
+
+            //foreach(KeyValuePair<string, List<string>> cityBook in CityBook)
+            //{
+            //    Console.WriteLine("City Name : " + cityBook.Key);
+            //    foreach (string name in cityBook.Value)
+            //    {
+            //        Console.WriteLine("Name City : " + name);
+            //    }
+            //}
+
+            //foreach (KeyValuePair<string, List<string>> stateBook in StateBook)
+            //{
+            //    Console.WriteLine("Satte Name : " + stateBook.Key);
+            //    foreach(string name in stateBook.Value)
+            //    {
+            //        Console.WriteLine("Name State: "  + name);
+            //    }
+            //}
         }
 
 
@@ -151,15 +187,17 @@ namespace AddressBookProgram
         public void SearchNameByCity(string city)
         {
             bool personFound = false;
-            Console.WriteLine("Name of persons in " + city + " : ");
-            Console.WriteLine("First Name" + "\tLast Name");
-            foreach (KeyValuePair<string, List<PersonDetails>> book in AddressBooks)
+            foreach (KeyValuePair<string, List<string>> cityDetails in CityBook)
             {
-                PersonDetails person = book.Value.Find((p => p.city == city));
-                if (person != null)
+                bool person = cityDetails.Key.Equals(city);
+                if (person)
                 {
-                    Console.WriteLine(person.firstName + "\t\t" + person.lastName);
                     personFound = true;
+                    Console.WriteLine("Name of persons in " + city + " : ");
+                    foreach (string name in cityDetails.Value)
+                    {
+                        Console.WriteLine(name);
+                    }
                 }
             }
             if (!personFound)
@@ -170,16 +208,17 @@ namespace AddressBookProgram
         public void SearchNameByState(string state)
         {
             bool personFound = false;
-
-            Console.WriteLine("Name of persons in " + state + " : ");
-            Console.WriteLine("First Name" + "\tLast Name");
-            foreach (KeyValuePair<string, List<PersonDetails>> book in AddressBooks)
+            foreach (KeyValuePair<string, List<string>> stateDetails in StateBook)
             {
-                PersonDetails person = book.Value.Find((p => p.state == state));
-                if (person != null)
+                bool person = stateDetails.Key.Equals(state);
+                if (person)
                 {
-                    Console.WriteLine(person.firstName + "\t\t" + person.lastName);
                     personFound = true;
+                    Console.WriteLine("Name of persons in " + state + " : ");
+                    foreach (string name in stateDetails.Value)
+                    {
+                        Console.WriteLine(name);
+                    }
                 }
             }
             if (!personFound)
