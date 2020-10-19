@@ -98,13 +98,18 @@ namespace AddressBookProgram
 
         public bool checkIfNameAlreadyExists(string name)
         {
-            if (AddressBookCalc.CurrentContact.Any(x => x.firstName.Equals(name)))
+            foreach (KeyValuePair<string, List<PersonDetails>> book in AddressBookCalc.AddressBooks)
             {
-                Console.WriteLine("Name " + "'" + name + "'" + " already exists");
-                return true;
+                if (book.Value.Any(x => x.firstName.Equals(name)))
+                {
+                    Console.WriteLine("Name " + "'" + name + "'" + " already exists");
+                    return true;
+                }
+                else
+                    return false;
             }
-            else
-                return false;
+            return false;
+            
         }
 
     }

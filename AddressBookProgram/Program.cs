@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace AddressBookProgram
 {
@@ -12,9 +13,9 @@ namespace AddressBookProgram
         {
             Console.WriteLine("Welcome to Address Book Program!");
             int option = 0;
-            while(option != 5)
+            while(option != 7)
             {
-                Console.WriteLine("\nSelect an option : \n1. Display Address Book \n2. Add Contact \n3. Edit Contact \n4. Delete Contact \n5. Exit \n");
+                Console.WriteLine("\nSelect an option : \n1. Display Address Book \n2. Add Contact \n3. Edit Contact \n4. Delete Contact \n5. Search By City \n6. Search By State \n7. Exit");
                 option = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
                 switch (option)
@@ -33,6 +34,14 @@ namespace AddressBookProgram
 
                     case 4:
                         ToDeleteContact();
+                        break;
+
+                    case 5:
+                        ToSearchCity();
+                        break;
+
+                    case 6:
+                        ToSearchState();
                         break;
 
                     default:
@@ -73,5 +82,18 @@ namespace AddressBookProgram
             addressBook.DeleteContact(name);
         }
 
+        private static void ToSearchCity()
+        {
+            Console.Write("Enter the city name : ");
+            var city = Console.ReadLine();
+            addressBook.SearchNameByCity(city);
+        }
+
+        private static void ToSearchState()
+        {
+            Console.Write("Enter the state name : ");
+            var state = Console.ReadLine();
+            addressBook.SearchNameByState(state);
+        }
     }
 }

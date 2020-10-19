@@ -148,5 +148,44 @@ namespace AddressBookProgram
 
         }
 
+        public void SearchNameByCity(string city)
+        {
+            bool personFound = false;
+            Console.WriteLine("Name of persons in " + city + " : ");
+            Console.WriteLine("First Name" + "\tLast Name");
+            foreach (KeyValuePair<string, List<PersonDetails>> book in AddressBooks)
+            {
+                PersonDetails person = book.Value.Find((p => p.city == city));
+                if (person != null)
+                {
+                    Console.WriteLine(person.firstName + "\t\t" + person.lastName);
+                    personFound = true;
+                }
+            }
+            if (!personFound)
+                Console.WriteLine("No person found in " + city);
+
+        }
+
+        public void SearchNameByState(string state)
+        {
+            bool personFound = false;
+
+            Console.WriteLine("Name of persons in " + state + " : ");
+            Console.WriteLine("First Name" + "\tLast Name");
+            foreach (KeyValuePair<string, List<PersonDetails>> book in AddressBooks)
+            {
+                PersonDetails person = book.Value.Find((p => p.state == state));
+                if (person != null)
+                {
+                    Console.WriteLine(person.firstName + "\t\t" + person.lastName);
+                    personFound = true;
+                }
+            }
+            if (!personFound)
+                Console.WriteLine("No person found in " + state);
+
+        }
+
     }
 }
