@@ -45,7 +45,8 @@ namespace AddressBookProgram
             CurrentContact.Add(person);
             Console.WriteLine("\nContact added successfully");
             //File_Read_Write.WriteUsingStreamWriter(AddressBooks);
-            File_Read_Write.WriteToCSV(AddressBooks);
+            //File_Read_Write.WriteToCSV(AddressBooks);
+            File_Read_Write.WriteToJSON(AddressBooks);
         }
 
 

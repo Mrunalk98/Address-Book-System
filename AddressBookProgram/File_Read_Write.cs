@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -39,6 +40,21 @@ namespace AddressBookProgram
                     csvExport.WriteRecords(book.Value);
                 }
             }
+        }
+
+        public static void WriteToJSON(Dictionary<string, List<PersonDetails>> AddressBooks)
+        {
+            string path = @"D:\Practice Projects\AddressBookProgram\AddressBookProgram\Utility\ContactList.json";
+            JsonSerializer serializer = new JsonSerializer();
+            using (StreamWriter sw = new StreamWriter(path))
+            using (JsonWriter jw = new JsonTextWriter(sw))
+            {
+                foreach (KeyValuePair<string, List<PersonDetails>> book in AddressBooks)
+                {
+                    serializer.Serialize(jw, book.Value);
+                }
+            }
+
         }
     }
 }
