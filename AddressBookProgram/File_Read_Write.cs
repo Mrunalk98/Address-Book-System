@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -24,6 +26,19 @@ namespace AddressBookProgram
                 }
             }
 
+        }
+
+        public static void WriteToCSV(Dictionary<string, List<PersonDetails>> AddressBooks)
+        {
+            string path = @"D:\Practice Projects\AddressBookProgram\AddressBookProgram\Utility\ContactList.csv";
+            using (var writer = new StreamWriter(path))
+            using (var csvExport = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                foreach (KeyValuePair<string, List<PersonDetails>> book in AddressBooks)
+                {
+                    csvExport.WriteRecords(book.Value);
+                }
+            }
         }
     }
 }
