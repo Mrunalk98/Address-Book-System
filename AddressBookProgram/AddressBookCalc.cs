@@ -44,24 +44,7 @@ namespace AddressBookProgram
             NamesInState.Add(firstName + " " + lastName);
             CurrentContact.Add(person);
             Console.WriteLine("\nContact added successfully");
-
-            //foreach(KeyValuePair<string, List<string>> cityBook in CityBook)
-            //{
-            //    Console.WriteLine("City Name : " + cityBook.Key);
-            //    foreach (string name in cityBook.Value)
-            //    {
-            //        Console.WriteLine("Name City : " + name);
-            //    }
-            //}
-
-            //foreach (KeyValuePair<string, List<string>> stateBook in StateBook)
-            //{
-            //    Console.WriteLine("Satte Name : " + stateBook.Key);
-            //    foreach(string name in stateBook.Value)
-            //    {
-            //        Console.WriteLine("Name State: "  + name);
-            //    }
-            //}
+            File_Read_Write.WriteUsingStreamWriter(AddressBooks);
         }
 
 
@@ -94,7 +77,7 @@ namespace AddressBookProgram
                     }
                     Console.WriteLine();
                 }
-            }            
+            }
         }
 
         public void DisplaySortedContacts()

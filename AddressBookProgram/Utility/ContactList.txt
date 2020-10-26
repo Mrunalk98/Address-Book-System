@@ -1,0 +1,5 @@
+All Contacts in book1 : 
+
+First Name 		 Last Name 		 Address 		 City 		 State 		 Zip Code 		 Phone Number 		 Email Id
+mrunal			kurhade			abcde			mumbai		maha			478596			7485965236			mru@as.oo
+
