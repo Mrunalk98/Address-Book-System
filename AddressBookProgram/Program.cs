@@ -13,9 +13,9 @@ namespace AddressBookProgram
         {
             Console.WriteLine("Welcome to Address Book Program!");
             int option = 0;
-            while(option != 6)
+            while(option != 7)
             {
-                Console.WriteLine("\nSelect an option : \n1. Display Address Book \n2. Add Contact \n3. Edit Contact \n4. Delete Contact \n5. Search Contact \n6. Exit");
+                Console.WriteLine("\nSelect an option : \n1. Display Address Book \n2. Add Contact \n3. Edit Contact \n4. Delete Contact \n5. Search Contact \n6. Sort Contacts \n7. Exit");
                 option = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
                 switch (option)
@@ -38,6 +38,10 @@ namespace AddressBookProgram
 
                     case 5:
                         Search();
+                        break;
+
+                    case 6:
+                        addressBook.DisplaySortedContacts();
                         break;
 
                     default:
@@ -134,6 +138,7 @@ namespace AddressBookProgram
                 Console.WriteLine("State : " + stateBook.Key + "\t\tNumber of persons : " + stateBook.Value.Count);
             }
         }
+
 
     }
 }
