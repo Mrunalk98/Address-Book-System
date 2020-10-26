@@ -13,9 +13,9 @@ namespace AddressBookProgram
         {
             Console.WriteLine("Welcome to Address Book Program!");
             int option = 0;
-            while(option != 9)
+            while(option != 6)
             {
-                Console.WriteLine("\nSelect an option : \n1. Display Address Book \n2. Add Contact \n3. Edit Contact \n4. Delete Contact \n5. Search By City \n6. Search By State \n7. Search Number of persons in City \n8. Search Number of persons in State  \n9. Exit");
+                Console.WriteLine("\nSelect an option : \n1. Display Address Book \n2. Add Contact \n3. Edit Contact \n4. Delete Contact \n5. Search Contact \n6. Exit");
                 option = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
                 switch (option)
@@ -37,19 +37,7 @@ namespace AddressBookProgram
                         break;
 
                     case 5:
-                        ToSearchCity();
-                        break;
-
-                    case 6:
-                        ToSearchState();
-                        break;
-
-                    case 7:
-                        GetCountOfPersonByCity();
-                        break;
-
-                    case 8:
-                        GetCountOfPersonByState();
+                        Search();
                         break;
 
                     default:
@@ -90,6 +78,33 @@ namespace AddressBookProgram
             addressBook.DeleteContact(name);
         }
 
+        private static void Search()
+        {
+            Console.WriteLine("Select an option : \n1. Search By City \n2. Search By State \n3. Get Number of persons in City \n4. Get Number of persons in State");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch(choice)
+            {
+                case 1:
+                    ToSearchCity();
+                    break;
+
+                case 2:
+                    ToSearchState();
+                    break;
+
+                case 3:
+                    GetCountOfPersonByCity();
+                    break;
+
+                case 4:
+                    GetCountOfPersonByState();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         private static void ToSearchCity()
         {
             Console.Write("Enter the city name : ");
@@ -108,7 +123,7 @@ namespace AddressBookProgram
         {
             foreach (KeyValuePair<string, List<string>> cityBook in AddressBookCalc.CityBook)
             {
-                Console.WriteLine("City : " + cityBook.Key + "\tNumber of persons : " + cityBook.Value.Count);
+                Console.WriteLine("City : " + cityBook.Key + "\t\tNumber of persons : " + cityBook.Value.Count);
             }
         }
 
@@ -116,7 +131,7 @@ namespace AddressBookProgram
         {
             foreach (KeyValuePair<string, List<string>> stateBook in AddressBookCalc.StateBook)
             {
-                Console.WriteLine("State : " + stateBook.Key + "\tNumber of persons : " + stateBook.Value.Count);
+                Console.WriteLine("State : " + stateBook.Key + "\t\tNumber of persons : " + stateBook.Value.Count);
             }
         }
 
