@@ -15,17 +15,16 @@ namespace AddressBookProgram
         public long phoneNumber { get; set; }
         public string email { get; set; }
 
-        public PersonDetails(string FIRST_NAME, string LAST_NAME, string ADDRESS, string CITY, string STATE, int ZIP, long PHONE_NO, string EMAIL)
+        public PersonDetails(string firstName, string lastName, string address, string city, string state, int zip, long phoneNumber, string email)
         {
-            this.firstName = FIRST_NAME;
-            this.lastName = LAST_NAME;
-            this.address = ADDRESS;
-            this.city = CITY;
-            this.state = STATE;
-            this.zip = ZIP;
-            this.phoneNumber = PHONE_NO;
-            this.email = EMAIL;
-
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.address = address;
+            this.city = city;
+            this.state = state;
+            this.zip = zip;
+            this.phoneNumber = phoneNumber;
+            this.email = email;
         }
     }
 }
