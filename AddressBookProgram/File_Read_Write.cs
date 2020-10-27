@@ -83,11 +83,22 @@ namespace AddressBookProgram
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 var records = csv.GetRecords<PersonDetails>().ToList();
-                Console.WriteLine("Read data successful from ConntactList.csv");
+                Console.WriteLine("Read data successful from ContactList.csv");
                 foreach (PersonDetails person in records)
                 {
                     Console.WriteLine(person.firstName + "\t\t" + person.lastName + "\t\t" + person.address + "\t\t" + person.city + "\t" + person.state + "\t" + person.zip + "\t\t" + person.phoneNumber + "\t" + person.email);
                 }                
+            }
+        }
+
+        public static void ReadFromJSON()
+        {
+            string path = @"D:\Practice Projects\AddressBookProgram\AddressBookProgram\Utility\ContactList.json";
+            IList<PersonDetails> addressData = JsonConvert.DeserializeObject<IList<PersonDetails>>(File.ReadAllText(path));
+            Console.WriteLine("Read data successful from ContactList.json");
+            foreach (PersonDetails person in addressData)
+            {
+                Console.WriteLine(person.firstName + "\t" + person.lastName + "\t" + person.address + "\t" + person.city + "\t" + person.state + "\t" + person.zip + "\t" + person.phoneNumber + "\t" + person.email);
             }
         }
     }

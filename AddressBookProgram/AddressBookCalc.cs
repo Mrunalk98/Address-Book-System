@@ -54,7 +54,8 @@ namespace AddressBookProgram
         public void PrintContacts ()
         {
             //File_Read_Write.ReadFromStreamReader();
-            File_Read_Write.ReadFromCSV();
+            //File_Read_Write.ReadFromCSV();
+            File_Read_Write.ReadFromJSON();
         }
 
         public void DisplaySortedContacts()
