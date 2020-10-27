@@ -51,34 +51,7 @@ namespace AddressBookProgram
 
         public void PrintContacts ()
         {
-            if (AddressBooks.Count == 0)
-            {
-                Console.WriteLine("No Address Book to display");
-            }
-            foreach (KeyValuePair<string, List<PersonDetails>> book in AddressBooks)            
-            {
-                if (AddressBooks[book.Key].Count == 0)
-                {
-                    Console.WriteLine("Address Book " + book.Key +" is empty");
-                }
-                else
-                {
-                    Console.WriteLine("All Contacts in " + book.Key + " : \n");
-                    foreach (PersonDetails person in book.Value)
-                    {
-                        Console.WriteLine("First Name : " + person.firstName);
-                        Console.WriteLine("Last Name : " + person.lastName);
-                        Console.WriteLine("Address : " + person.address);
-                        Console.WriteLine("City : " + person.city);
-                        Console.WriteLine("State : " + person.state);
-                        Console.WriteLine("Zip Code : " + person.zip);
-                        Console.WriteLine("Phone Number : " + person.phoneNumber);
-                        Console.WriteLine("Email : " + person.email);
-                        Console.WriteLine();
-                    }
-                    Console.WriteLine();
-                }
-            }
+            File_Read_Write.ReadFromStreamReader();
         }
 
         public void DisplaySortedContacts()

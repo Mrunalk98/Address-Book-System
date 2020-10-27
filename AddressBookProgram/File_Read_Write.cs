@@ -17,10 +17,10 @@ namespace AddressBookProgram
                 foreach (KeyValuePair<string, List<PersonDetails>> book in AddressBooks)
                 {
                     tw.WriteLine("All Contacts in " + book.Key + " : \n");
-                    tw.WriteLine("First Name \t\t Last Name \t\t Address \t\t City \t\t State \t\t Zip Code \t\t Phone Number \t\t Email Id");
+                    tw.WriteLine("First Name \t Last Name \t Address \t City \t State \t Zip Code \t Phone Number \t Email Id");
                     foreach (PersonDetails person in book.Value)
                     {
-                        tw.WriteLine(person.firstName + "\t\t\t" +person.lastName + "\t\t\t" + person.address + "\t\t\t" + person.city + "\t\t" + person.state + "\t\t" + person.zip + "\t\t\t" + person.phoneNumber + "\t\t\t" + person.email);
+                        tw.WriteLine(person.firstName + "\t\t" +person.lastName + "\t\t" + person.address + "\t\t" + person.city + "\t" + person.state + "\t" + person.zip + "\t\t" + person.phoneNumber + "\t" + person.email);
                     }
                     tw.WriteLine();
                 }
@@ -38,6 +38,24 @@ namespace AddressBookProgram
                 {
                     csvExport.WriteRecords(book.Value);
                 }
+            }
+        }
+
+        public static void ReadFromStreamReader()
+        {
+            string path = @"D:\Practice Projects\AddressBookProgram\AddressBookProgram\Utility\ContactList.txt";
+            using (StreamReader sr = File.OpenText(path))
+            {
+                String s = "";
+                if (sr.ReadLine() == null)
+                {
+                    Console.WriteLine("No Address Books to display");
+                }
+                while ((s = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(s);
+                }
+                sr.Close();
             }
         }
     }
