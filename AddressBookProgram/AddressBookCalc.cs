@@ -23,6 +23,7 @@ namespace AddressBookProgram
         public void AddContacts(string bookName, string firstName, string lastName, string address, string city, string state, int zip, long phone, string email)
         {
             PersonDetails person = new PersonDetails(firstName, lastName, address, city, state, zip, phone, email);
+
             if (!AddressBooks.TryGetValue(bookName, out CurrentContact))
             {
                 CurrentContact = new List<PersonDetails>();
@@ -45,14 +46,15 @@ namespace AddressBookProgram
             CurrentContact.Add(person);
             Console.WriteLine("\nContact added successfully");
             //File_Read_Write.WriteUsingStreamWriter(AddressBooks);
-            //File_Read_Write.WriteToCSV(AddressBooks);
-            File_Read_Write.WriteToJSON(AddressBooks);
+            File_Read_Write.WriteToCSV(AddressBooks);
+            //File_Read_Write.WriteToJSON(AddressBooks);
         }
 
 
         public void PrintContacts ()
         {
-            File_Read_Write.ReadFromStreamReader();
+            //File_Read_Write.ReadFromStreamReader();
+            File_Read_Write.ReadFromCSV();
         }
 
         public void DisplaySortedContacts()

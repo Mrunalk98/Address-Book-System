@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace AddressBookProgram
@@ -71,6 +72,22 @@ namespace AddressBookProgram
                     Console.WriteLine(s);
                 }
                 sr.Close();
+            }
+        }
+
+
+        public static void ReadFromCSV()
+        {
+            string path = @"D:\Practice Projects\AddressBookProgram\AddressBookProgram\Utility\ContactList.csv";
+            using (var reader = new StreamReader(path))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                var records = csv.GetRecords<PersonDetails>().ToList();
+                Console.WriteLine("Read data successful from ConntactList.csv");
+                foreach (PersonDetails person in records)
+                {
+                    Console.WriteLine(person.firstName + "\t\t" + person.lastName + "\t\t" + person.address + "\t\t" + person.city + "\t" + person.state + "\t" + person.zip + "\t\t" + person.phoneNumber + "\t" + person.email);
+                }                
             }
         }
     }
